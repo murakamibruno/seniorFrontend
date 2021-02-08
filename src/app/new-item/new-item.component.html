@@ -1,0 +1,38 @@
+<h2 class="text-center"> Cadastro de Novo Item</h2>
+<form #itemForm="ngForm" (ngSubmit)="saveItem(itemForm)">
+    <div class="form-group">
+        <label for="nome">Nome do Item</label>
+        <input type="text" name="nome" class="form-control" [(ngModel)]="item.nome" maxlength="50" required pattern="^[a-zA-Z ]*$">
+    </div>
+    <div class="form-group">
+        <label for="unidade">Unidade do Item</label>
+        <select class="form-control" name="unidade" [(ngModel)]="item.unidade" required>
+            <option *ngFor="let unidade of eUnidadeType | keyvalue" [ngValue]="unidade.value">{{unidade.value}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="quantidade">Quantidade do Item</label>
+        <input type="number" name="quantidade" class="form-control" [(ngModel)]="item.quantidade"  [pattern]="item.unidade == 'Unidade' ? '^[0-9]*$' : '[0-9]+([\.,]*[0-9]{0,3}$)'">
+    </div>
+    <div class="form-group">
+        <label for="preco">Preço do Item</label>
+        <input type="text" name="preco"  class="form-control" currencyMask [(ngModel)]="item.preco"  [options]="{ align: 'left', precision: 2, prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+    </div>
+    <div class="form-group">
+        <label for="isPerecivel"> É perecível
+            <input type="checkbox" name="isPerecivel" [(ngModel)]="item.isPerecivel" class="form-control" [checked]="true">
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="dataValidade"> Data de Validade </label>
+        <input type="date" name="dataValidade" [(ngModel)]="item.dataValidade" class="form-control" [required]="item.isPerecivel ? item.isPerecivel : undefined">
+    </div>
+    <div class="form-group">
+        <label for="dataFabricacao"> Data de Fabricação </label>
+        <input type="date" name="dataFabricacao" [(ngModel)]="item.dataFabricacao" class="form-control" required>
+    </div>
+    <div class="btn-toolbar">
+        <button type="submit" class="btn btn-primary" (click)="setIsSaving(true)">Salvar</button>
+        <button type="submit" class="btn btn-primary" (click)="setIsSaving(false)" style="background-color: red; ">Cancelar</button>
+    </div>
+</form>

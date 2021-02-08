@@ -1,0 +1,56 @@
+<h2 class="text-center"> Listagem de Itens</h2>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome do Item </th>
+      <td mat-cell *matCellDef="let item"> {{item.nome}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="unidade">
+      <th mat-header-cell *matHeaderCellDef> Unidade de medida </th>
+      <td mat-cell *matCellDef="let item"> {{item.unidade}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="quantidade">
+      <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+      <td mat-cell *matCellDef="let item"> {{item.quantidade}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="preco">
+      <th mat-header-cell *matHeaderCellDef> Preço </th>
+      <td mat-cell *matCellDef="let item"> {{item.preco}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isPerecivel">
+        <th mat-header-cell *matHeaderCellDef> É perecível </th>
+        <td mat-cell *matCellDef="let item"> {{item.isPerecivel}} </td>
+      </ng-container>
+    
+    <ng-container matColumnDef="dataValidade">
+        <th mat-header-cell *matHeaderCellDef> Data de validade </th>
+        <td mat-cell *matCellDef="let item"> {{item.dataValidade | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="dataFabricacao">
+        <th mat-header-cell *matHeaderCellDef> Data de fabricação </th>
+        <td mat-cell *matCellDef="let item"> {{item.dataFabricacao | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let item"> <button mat-raised-button color="primary" (click)="editItemRedirect(item)">Editar</button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="excluir">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let item"> <button mat-raised-button color="warn" (click)="deleteItem(item)" >Excluir</button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <br>
+  <button type="submit" class="btn btn-primary" (click)="novoItem()">Novo item</button>
+
+  
+  
+  
